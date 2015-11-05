@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+
+import matplotlib.pyplot as plt
+import aplpy
+
+fig = plt.figure(figsize=(12, 12))
+f1 = aplpy.FITSFigure('L40979_SAP003_SB240_uv.MS.NEW_Feb13_1CHNL.dppp.dppp.prepeel.2500clip.img0.avgpb.fits', figure=fig)
+# f1.show_grayscale(vmin=0.005, vmax=6.032e-01)
+f1.set_theme('publication')
+f1.show_colorscale(cmap='rainbow', vmin=0., vmax=1.0)
+f1.recenter(15., 90., 9.)
+# f1.add_beam()
+# f1.beam.set_frame(True)
+# f1.beam.set_facecolor('black')
+f1.add_grid()
+f1.grid.set_color('black')
+f1.grid.set_alpha(0.1)
+f1.add_colorbar()
+f1.axis_labels.set_xtext('Right Ascension (J2000)')
+f1.axis_labels.set_ytext('Declination (J2000)')
+f1.axis_labels.set_font(size='x-large')
+f1.tick_labels.set_yformat('dd')
+f1.tick_labels.set_xformat('hh')
+f1.tick_labels.set_font(size='large')
+f1.ticks.set_xspacing(15)
+f1.ticks.set_yspacing(1)
+f1.show_circles([15.,], [90.,], radius=7.5, layer='trap-circle-f1', linewidth=3)
+f1.show_circles([15.,], [90.,], radius=7.5/4., layer='trap-circle-f2')
+f1.show_circles([15.,], [90.,], radius=7.5/2., layer='trap-circle-f3')
+f1.show_circles([15.,], [90.,], radius=3.*7.5/4., layer='trap-circle-f4')
+f1.show_circles([15.,], [90.,], radius=4.885, layer='FWHM', linestyle="--")
+f1.save('NCP_PB.pdf')
+# plt.show()
